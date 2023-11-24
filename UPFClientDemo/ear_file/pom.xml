@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.oocl.demo</groupId>
+  <artifactId>UPF_CLIENT_DEMO_ear</artifactId>
+  <packaging>ear</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <parent>
+    <groupId>com.oocl.demo</groupId>
+    <artifactId>UPFClientDemo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.oocl.demo</groupId>
+      <artifactId>UPF_CLIENT_DEMO_war</artifactId>
+      <type>war</type>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <generateApplicationXml>false</generateApplicationXml>
+          <modules>
+            <webModule>
+              <groupId>com.oocl.demo</groupId>
+              <artifactId>UPF_CLIENT_DEMO_war</artifactId>
+              <bundleFileName>UPF_CLIENT_DEMO_war.war</bundleFileName>
+            </webModule>
+          </modules>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

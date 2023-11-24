@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.oocl.demo</groupId>
+    <artifactId>UPFClientDemo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>UPFClientDemo</name>
+    <description>UPFClientDemo</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <jersey.version>2.34</jersey.version>
+    </properties>
+
+    <modules>
+        <module>ear_file</module>
+        <module>war_file</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet-core</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.inject</groupId>
+                <artifactId>jersey-hk2</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-common</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-jaxb</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-jackson</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.ext</groupId>
+                <artifactId>jersey-entity-filtering</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerVersion>1.8</compilerVersion>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <!--                maven 会默认把resources下面的资源放到target/classess/下面-->
+<!--                而且如果配置了在maven 中resource，但默认行为是不会被代替，默认行为仍然生效-->
+<!--                而且注意的是，src/main/resources/**和src/main/resources/* 放在directory标签里面是不生效的，directory要的就是一个文件夹-->
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.outputDirectory}</targetPath>
+            </resource>
+            <resource>
+<!--                这里把D:\githome\MyTrain\UPFClientDemo\war_file\src\main\resources\config的资源都放在target/classess下面，否则如果用默认行文，那么会被放在target/classess/config下面-->
+<!--                而使用idea 去运行src/main/java/****/xxxx.java的main方法的时候，会在java的启动参数上默认添加target/classess的classpath,所以才能使用ClassLoader.getResource()来获取资源文件-->
+                <directory>src/main/resources/config</directory>
+                <targetPath>${project.build.outputDirectory}</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+</project>

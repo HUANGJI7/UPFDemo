@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.oocl.demo</groupId>
+	<artifactId>WLS_UPF_ear</artifactId>
+	<packaging>ear</packaging>
+	<name>Framework tool UPF ear</name>
+	<version>1.0.0</version>
+
+	<parent>
+		<groupId>com.oocl.demo</groupId>
+		<artifactId>UPFServer</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.oocl.demo</groupId>
+			<artifactId>WLS_UPF_war</artifactId>
+			<type>war</type>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.artifactId}</Implementation-Title>
+							<Implementation-Vendor>OOCL Framework</Implementation-Vendor>
+							<Implementation-Version>Tool ${project.version}</Implementation-Version>
+						</manifestEntries>
+					</archive>
+					<generateApplicationXml>false</generateApplicationXml>
+					<modules>
+						<webModule>
+							<groupId>com.oocl.demo</groupId>
+							<artifactId>WLS_UPF_war</artifactId>
+							<bundleFileName>WLS_UPF.war</bundleFileName>
+						</webModule>
+					</modules>
+					<earSourceExcludes>**/*.vpp</earSourceExcludes>
+					<packagingExcludes>*.jar</packagingExcludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
